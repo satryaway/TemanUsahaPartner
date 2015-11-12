@@ -100,7 +100,7 @@
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/get_loan" />
+        android:src="@drawable/get_cust" />
 
     <include layout="@layout/bottom_bar_wrapper" />
 

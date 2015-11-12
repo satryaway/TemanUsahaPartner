@@ -18,13 +18,14 @@ public class CommonConstants {
     public static String SERVICE_LOGIN_PARTNER = BASE_URL + "doLogin/partner";
     public static String SERVICE_DO_REGISTER_USER = BASE_URL + "doRegister/user";
     public static String SERVICE_UPDATE_USER_PROFILE = BASE_URL + "doModify/user";
+    public static String SERVICE_DO_MODIFY_PARTNER = BASE_URL + "doModify/partner";
     public static String SERVICE_FORGOT_PASSWORD = BASE_URL + "forgot_password";
     public static String SERVICE_GET_USER_DETAIL = BASE_URL + "getUserDetail/user/";
+    public static String SERVICE_GET_PARTNER_DETAIL = BASE_URL + "getUserDetail/partner/";
     public static String SERVICE_CHANGE_PASSWORD = BASE_URL + "change_password";
     public static String SERVICE_PROFILE_PIC = BASE_URL + "images/profile_pictures/users/";
     public static String SERVICE_PROFILE_PIC_PARTNER = BASE_URL + "images/profile_pictures/partners/";
     public static String SERVICE_GET_PARTNER_LIST = BASE_URL + "loan/list_partners/";
-    public static String SERVICE_GET_PARTNER_DETAIL = BASE_URL + "getUserDetail/partner/";
     public static String SERVICE_SAVE_APPLICATION = BASE_URL + "loan/save_application";
     public static String SERVICE_PROCESS_APPLICATION = BASE_URL + "loan/process_application";
     public static String SERVICE_GET_CONNECTED_PARTNER = BASE_URL + "loan/list_connected_partners/";
@@ -93,8 +94,8 @@ public class CommonConstants {
     public static String APPROVED = "approved";
     public static String REJECTED = "rejected";
     public static String USER = "user";
-    public static String CURRENT_PASSWORD = "current_password";
 
+    public static String CURRENT_PASSWORD = "current_password";
     public static String KAS = "kas";
     public static String TABUNGAN = "tabungan";
     public static String PERSEDIAAN = "persediaan";

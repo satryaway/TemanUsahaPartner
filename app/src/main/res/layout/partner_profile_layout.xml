@@ -63,17 +63,17 @@
                 android:id="@+id/profile_picture_iv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
+                android:layout_marginTop="20dp"
                 android:src="@drawable/profile" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textStyle="bold"
-                android:text="@string/first_name"/>
+                android:text="@string/first_name"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/first_name_et"
@@ -84,8 +84,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="@string/last_name"/>
+                android:text="@string/last_name"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/last_name_et"
@@ -96,8 +96,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="@string/gender"/>
+                android:text="@string/gender"
+                android:textStyle="bold" />
 
             <RadioGroup
                 android:id="@+id/gender_rg"
@@ -122,9 +122,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:layout_marginTop="10dp"
-                android:text="@string/place_of_birth"/>
+                android:text="@string/place_of_birth"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/place_of_birth_et"
@@ -135,8 +135,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="@string/date_of_birth"/>
+                android:text="@string/date_of_birth"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/date_of_birth_et"
@@ -147,13 +147,74 @@
 
             <include layout="@layout/partial_partner_profile_layout" />
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/tujuan_kredit"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/tujuan_kredit_sp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:prompt="@string/tujuan_kredit" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/plafon_kredit"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/plafon_kredit_sp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:prompt="@string/plafon_kredit" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/save_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:scrollbars="vertical"
+                android:text="@string/save"
+                android:textSize="18sp" />
+
             <ImageView
                 style="@style/wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:src="@drawable/logo"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@string/nothing"
                 android:padding="20dp"
-                android:contentDescription="@string/nothing" />
+                android:src="@drawable/logo" />
 
         </LinearLayout>
     </ScrollView>
