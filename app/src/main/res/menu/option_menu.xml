@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/rate_the_app"
+        android:title="@string/rate_the_app" />
+
+    <item
+        android:id="@+id/term_of_service"
+        android:title="@string/term_of_service" />
+
+    <item
+        android:id="@+id/change_password"
+        android:title="@string/change_password" />
+
+    <item
+        android:id="@+id/contact_us"
+        android:title="@string/contact_us" />
+
+    <item
+        android:id="@+id/logout"
+        android:title="@string/logout" />
+
+</menu> 

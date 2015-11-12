@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/topbar_wrapper" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottombar_wrapper"
+        android:layout_below="@id/top_bar_wrapper">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/processed_by_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:padding="20dp"
+                android:text="@string/your_loan_will_be_processed_by"
+                android:textAllCaps="true"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/profile_picture_iv"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_below="@id/processed_by_tv"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/nothing"
+                android:src="@drawable/profile" />
+
+            <TextView
+                android:id="@+id/partner_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_picture_iv"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/default_partner_name"
+                android:textAllCaps="true"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/pt_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/partner_name_tv"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/default_pt_name"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/kcp_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pt_name_tv"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/default_kcp_name"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/pt_strength_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/kcp_name_tv"
+                android:layout_margin="30dp"
+                android:background="@drawable/border"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/pt_strength_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/send_app_btn"
+                style="@style/wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_corner_edittext"
+                android:text="@string/send"
+                android:layout_below="@+id/pt_strength_wrapper"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/blue_app"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+    <include
+        android:id="@+id/bottombar_wrapper"
+        layout="@layout/bottom_bar_wrapper" />
+
+
+</RelativeLayout>
