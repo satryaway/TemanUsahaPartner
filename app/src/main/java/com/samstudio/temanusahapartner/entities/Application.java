@@ -5,8 +5,10 @@ package com.samstudio.temanusahapartner.entities;
  * Application model
  */
 public class Application {
-    private String id, datetime, status, processDatetime, meetupDatetime, meetupVenue;
+    private String id, datetime, status, processDatetime, meetupDatetime, meetupVenue, loanType, loanSegment, timeRange;
     private Partner partner = new Partner();
+    private Customer customer = new Customer();
+
     public Application (){}
 
     public String getId() {
@@ -63,5 +65,37 @@ public class Application {
 
     public void setMeetupDatetime(String meetupDatetime) {
         this.meetupDatetime = meetupDatetime;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public String getTimeRange() {
+        return timeRange;
+    }
+
+    public void setTimeRange(String timeRange) {
+        this.timeRange = timeRange;
+    }
+
+    public String getLoanSegment() {
+        return loanSegment;
+    }
+
+    public void setLoanSegment(String loanSegment) {
+        this.loanSegment = loanSegment;
+    }
+
+    public String getLoanType() {
+        return loanType;
+    }
+
+    public void setLoanType(String loanType) {
+        this.loanType = loanType;
     }
 }

@@ -1,6 +1,7 @@
 package com.samstudio.temanusahapartner.util;
 
 import com.samstudio.temanusahapartner.entities.Application;
+import com.samstudio.temanusahapartner.entities.Customer;
 import com.samstudio.temanusahapartner.entities.Partner;
 
 import org.json.JSONArray;
@@ -98,6 +99,37 @@ public class Utility {
             e.printStackTrace();
         }
 
+        return application;
+    }
+
+    public static String convertLoanType(String loanType) {
+        return null;
+    }
+
+    public static Application parseApplicants(JSONObject response) {
+        Application application = new Application();
+        try {
+            application.setId(response.getString(CommonConstants.APP_ID));
+            application.setLoanType(response.getString(CommonConstants.LOAN_TYPE));
+            application.setLoanSegment(response.getString(CommonConstants.LOAN_SEGMENT));
+            application.setTimeRange(response.getString(CommonConstants.LOAN_PERIOD));
+
+            Customer customer = new Customer();
+            customer.setId(response.getString(CommonConstants.ID));
+            customer.setFirstName(response.getString(CommonConstants.FIRST_NAME));
+            customer.setLastName(response.getString(CommonConstants.LAST_NAME));
+            customer.setDateOfBirth(response.getString(CommonConstants.DATE_OF_BIRTH));
+            customer.setProfilePicture(response.getString(CommonConstants.PROFILE_PICTURE));
+            customer.setMaritalStatus(response.getString(CommonConstants.MARITAL_STATUS));
+            customer.setJob(response.getString(CommonConstants.JOB));
+            customer.setCompanyName(response.getString(CommonConstants.COMPANY_NAME));
+            customer.setLatitude(Double.valueOf(response.getString(CommonConstants.LATITUDE)));
+            customer.setLongitude(Double.valueOf(response.getString(CommonConstants.LONGITUDE)));
+
+            application.setCustomer(customer);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         return application;
     }
 }

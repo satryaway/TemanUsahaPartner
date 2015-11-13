@@ -111,7 +111,7 @@
         <!-- Goolge API Key -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyB73WGpdTKXwUMSu98HWurqe8HNNta9Phc" />
+            android:value="AIzaSyCGp6M14uFR844qaBNK49HiZiWBEMD0bv0" />
 
     </application>
 

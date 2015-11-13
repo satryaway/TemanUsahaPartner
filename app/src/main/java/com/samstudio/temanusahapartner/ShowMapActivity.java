@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -18,11 +19,14 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.samstudio.temanusahapartner.entities.Partner;
+import com.samstudio.temanusahapartner.entities.Application;
 import com.samstudio.temanusahapartner.util.APIAgent;
 import com.samstudio.temanusahapartner.util.CommonConstants;
+import com.samstudio.temanusahapartner.util.Seeder;
+import com.samstudio.temanusahapartner.util.UniversalImageLoader;
 import com.samstudio.temanusahapartner.util.Utility;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,15 +40,27 @@ import cz.msebera.android.httpclient.Header;
  * activity to show the list of available partner nearby by using google Map
  */
 public class ShowMapActivity extends AppCompatActivity {
-    private List<Partner> partnerList = new ArrayList<>();
+    private List<Application> applicationList = new ArrayList<>();
     private GoogleMap googleMap;
-    private int loanType, loanSegment, timeRange, personalityShape;
     private int chosenId = 1;
     private ImageView nextIV;
+    private ImageView profilePictureIV;
+    private TextView customerNameTV;
+    private TextView loanTypeTV;
+    private TextView loanSegmentTV;
+    private TextView timeRangeTV;
+    private UniversalImageLoader imageLoader;
+    private List<String> creditPurposeList = new ArrayList<>();
+    private List<String> creditCeilingList = new ArrayList<>();
+    private List<String> timeRangeList = new ArrayList<>();
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        imageLoader = new UniversalImageLoader(this);
+        imageLoader.initImageLoader();
+        collectData();
         handleIntent();
         initUI();
         setCallBack();
@@ -52,33 +68,27 @@ public class ShowMapActivity extends AppCompatActivity {
         putData();
     }
 
+    private void collectData() {
+        creditPurposeList = Seeder.getCreditPurposeList(this);
+        creditCeilingList = Seeder.getCreditCeilingList(this);
+        timeRangeList = Seeder.getTimeRangeList(this);
+    }
+
     private void handleIntent() {
-        Intent intent = getIntent();
-        personalityShape = intent.getIntExtra(CommonConstants.SHAPE_CODE, 0);
-        loanType = intent.getIntExtra(CommonConstants.LOAN_TYPE, 0);
-        loanSegment = intent.getIntExtra(CommonConstants.LOAN_SEGMENT, 0);
-        timeRange = intent.getIntExtra(CommonConstants.LOAN_PERIOD, 0);
     }
 
     private void initUI() {
         setContentView(R.layout.show_map_layout);
 
-        nextIV = (ImageView) findViewById(R.id.next_step_iv);
+        profilePictureIV = (ImageView) findViewById(R.id.profile_picture_iv);
+        customerNameTV = (TextView) findViewById(R.id.customer_name_tv);
+        loanTypeTV = (TextView) findViewById(R.id.loan_type_tv);
+        loanSegmentTV = (TextView) findViewById(R.id.loan_segment_tv);
+        timeRangeTV = (TextView) findViewById(R.id.time_range_tv);
     }
 
     private void setCallBack() {
-        nextIV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ShowMapActivity.this, PartnerConfirmationActivity.class);
-                intent.putExtra(CommonConstants.ID, chosenId);
-                intent.putExtra(CommonConstants.LOAN_TYPE, loanType);
-                intent.putExtra(CommonConstants.LOAN_SEGMENT, loanSegment);
-                intent.putExtra(CommonConstants.LOAN_PERIOD, timeRange);
-                intent.putExtra(CommonConstants.SHAPE_CODE, personalityShape);
-                startActivity(intent);
-            }
-        });
+
     }
 
     private void createMapView() {
@@ -105,16 +115,20 @@ public class ShowMapActivity extends AppCompatActivity {
                     .title(getString(R.string.your_location))
                     .draggable(false)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_white)));
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
         }
     }
 
     private void addMarkers() {
         addCurrentLocation();
         int i = 0;
-        for (Partner partner : partnerList) {
-            LatLng latLng = new LatLng(partner.getLat(), partner.getLng());
-            addMarker(latLng, partner.getCompany(), i);
+        for (Application application : applicationList) {
+            LatLng latLng = new LatLng(application.getCustomer().getLatitude(), application.getCustomer().getLongitude());
+            addMarker(latLng, application.getCustomer().getCompanyName(), i);
+
+            if (i == 0) {
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+            }
+
             i++;
         }
     }
@@ -130,7 +144,7 @@ public class ShowMapActivity extends AppCompatActivity {
             googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
-                    chosenId = partnerList.get(position).getId();
+                    showCustomerInformation(ShowMapActivity.this.position);
                     return false;
                 }
             });
@@ -138,7 +152,7 @@ public class ShowMapActivity extends AppCompatActivity {
     }
 
     private void putData() {
-        String url = CommonConstants.SERVICE_GET_PARTNER_LIST + loanType;
+        String url = CommonConstants.SERVICE_GET_APPLICANT_LIST + TemanUsahaApplication.getInstance().getSharedPreferences().getInt(CommonConstants.ID, 0);
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
@@ -160,10 +174,15 @@ public class ShowMapActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     if (response.getInt(CommonConstants.STATUS) == CommonConstants.STATUS_OK) {
-                        partnerList = Utility.parsePartners(response);
+                        JSONArray jsonArray = response.getJSONArray(CommonConstants.RETURN_DATA);
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject object = jsonArray.getJSONObject(i);
+                            applicationList.add(Utility.parseApplicants(object));
+                        }
                         addMarkers();
+                        showCustomerInformation(0);
                     } else {
-                        Toast.makeText(ShowMapActivity.this, R.string.no_correspondent_loan_type, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShowMapActivity.this, response.getString(CommonConstants.MESSAGE), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -186,5 +205,14 @@ public class ShowMapActivity extends AppCompatActivity {
                 progressDialog.dismiss();
             }
         });
+    }
+
+    private void showCustomerInformation(int position) {
+        Application application = applicationList.get(position);
+        imageLoader.display(profilePictureIV, CommonConstants.SERVICE_PROFILE_PIC + application.getCustomer().getProfilePicture());
+        customerNameTV.setText(application.getCustomer().getFirstName() + " " + application.getCustomer().getLastName());
+        loanTypeTV.setText(creditPurposeList.get(Integer.valueOf(applicationList.get(position).getLoanType())));
+        loanSegmentTV.setText(creditCeilingList.get(Integer.valueOf(applicationList.get(position).getLoanSegment())));
+        timeRangeTV.setText(timeRangeList.get(Integer.valueOf(applicationList.get(position).getTimeRange())));
     }
 }
