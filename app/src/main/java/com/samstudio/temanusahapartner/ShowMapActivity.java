@@ -1,11 +1,9 @@
 package com.samstudio.temanusahapartner;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
@@ -54,6 +53,7 @@ public class ShowMapActivity extends AppCompatActivity {
     private List<String> creditCeilingList = new ArrayList<>();
     private List<String> timeRangeList = new ArrayList<>();
     private int position;
+    private HashMap<Marker, Integer> hashMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +123,7 @@ public class ShowMapActivity extends AppCompatActivity {
         int i = 0;
         for (Application application : applicationList) {
             LatLng latLng = new LatLng(application.getCustomer().getLatitude(), application.getCustomer().getLongitude());
-            addMarker(latLng, application.getCustomer().getCompanyName(), i);
+            hashMap.put(addMarker(latLng, application.getCustomer().getCompanyName()), i);
 
             if (i == 0) {
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
@@ -131,24 +131,26 @@ public class ShowMapActivity extends AppCompatActivity {
 
             i++;
         }
+
+        final HashMap<Marker, Integer> markerMap = hashMap;
+
+        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                showCustomerInformation(markerMap.get(marker));
+                return false;
+            }
+        });
     }
 
-    private void addMarker(final LatLng pos, String name, final int position) {
-        if (null != googleMap) {
-            googleMap.addMarker(new MarkerOptions()
-                    .position(pos)
-                    .title(name)
-                    .draggable(false)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon)));
+    private Marker addMarker(final LatLng pos, String name) {
+        Marker marker = googleMap.addMarker(new MarkerOptions()
+                .position(pos)
+                .title(name)
+                .draggable(false)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon)));
 
-            googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                @Override
-                public boolean onMarkerClick(Marker marker) {
-                    showCustomerInformation(ShowMapActivity.this.position);
-                    return false;
-                }
-            });
-        }
+        return marker;
     }
 
     private void putData() {
@@ -214,5 +216,6 @@ public class ShowMapActivity extends AppCompatActivity {
         loanTypeTV.setText(creditPurposeList.get(Integer.valueOf(applicationList.get(position).getLoanType())));
         loanSegmentTV.setText(creditCeilingList.get(Integer.valueOf(applicationList.get(position).getLoanSegment())));
         timeRangeTV.setText(timeRangeList.get(Integer.valueOf(applicationList.get(position).getTimeRange())));
+        this.position = position;
     }
 }
