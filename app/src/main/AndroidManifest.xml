@@ -73,6 +73,7 @@
         <activity android:name=".AppStatusActivity" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".PartnerProfileActivity" />
+        <activity android:name=".SetUpMeetingActivity" />
         <activity android:name=".SignUpActivity" android:windowSoftInputMode="adjustPan" />
 
         <receiver

@@ -178,4 +178,13 @@
     <string name="default_venue">Jalan Raya Tanjungsari no. 399 kec. Tanjungsari, kab. Sumedang</string>
     <string name="partner_panel">Partner Panel</string>
     <string name="kebutuhan_kredit">Kebutuhan Kredit</string>
+    <string name="waiting_for_confirmation">Waiting for confirmation</string>
+    <string name="set_a_meeting">Set a Meeting</string>
+    <string name="set_up_meeting_appointment">Set up meeting appointment</string>
+    <string name="date">Date</string>
+    <string name="venue">Venue</string>
+    <string name="submit">Submit</string>
+    <string name="please_provide_a_valid_venue">please_provide_a_valid_venue</string>
+    <string name="notes">notes</string>
+    <string name="succed_make_appointment">You have set up meeting appointment</string>
 </resources>

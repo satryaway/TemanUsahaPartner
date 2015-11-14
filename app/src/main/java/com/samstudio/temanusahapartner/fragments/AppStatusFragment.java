@@ -79,6 +79,7 @@ public class AppStatusFragment extends Fragment {
                     case "administration process":
                         intent = new Intent(getActivity(), AdministrationProcessActivity.class);
                         intent.putExtra(CommonConstants.DATE, applicationList.get(position).getDatetime());
+                        intent.putExtra(CommonConstants.APP_ID, applicationList.get(position).getId());
                         break;
 
                     case "meet up":
@@ -122,7 +123,7 @@ public class AppStatusFragment extends Fragment {
     private void getData() {
         /*applicationList = position == 0 ? Seeder.getPartners() : Seeder.getPartnersWithResult();
         listAdapter.update(applicationList);*/
-        String url = CommonConstants.SERVICE_GET_CONNECTED_PARTNER + TemanUsahaApplication.getInstance().getSharedPreferences().getInt(CommonConstants.ID, 1);
+        String url = CommonConstants.SERVICE_GET_USERS_LIST + TemanUsahaApplication.getInstance().getSharedPreferences().getInt(CommonConstants.ID, 1);
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage(getString(R.string.please_wait));
 
@@ -150,7 +151,7 @@ public class AppStatusFragment extends Fragment {
                                 applicationList.add(application);
                             }
 
-                            if (position == 1 && (application.getStatus().equals(CommonConstants.CONFIRMED) || application.getStatus().equals(CommonConstants.REJECTED))) {
+                            if (position == 1 && (application.getStatus().equals(CommonConstants.CONFIRMED) || application.getStatus().equals(CommonConstants.REJECTED) || application.getStatus().equals(CommonConstants.CANCELLED))) {
                                 applicationList.add(application);
                             }
                         }

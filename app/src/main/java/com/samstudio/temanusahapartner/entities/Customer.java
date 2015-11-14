@@ -4,7 +4,7 @@ package com.samstudio.temanusahapartner.entities;
  * Created by satryaway on 11/13/2015.
  */
 public class Customer {
-    private String id, firstName, lastName, companyName, profilePicture, dateOfBirth;
+    private String id, firstName, lastName, companyName, profilePicture, dateOfBirth, phone;
     private String maritalStatus, job;
     private double latitude, longitude;
 
@@ -88,5 +88,13 @@ public class Customer {
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

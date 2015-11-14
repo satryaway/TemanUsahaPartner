@@ -79,7 +79,7 @@ public class Utility {
     public static Application parseApplications(JSONObject jsonObject) {
         Application application = new Application();
         try {
-            Partner partner = new Partner();
+            Customer customer = new Customer();
             application.setId(jsonObject.getString(CommonConstants.APP_ID));
             application.setStatus(jsonObject.getString(CommonConstants.STATUS));
             application.setDatetime(jsonObject.getString(CommonConstants.DATETIME));
@@ -87,14 +87,13 @@ public class Utility {
             application.setMeetupDatetime(jsonObject.getString(CommonConstants.MEETUP_DATETIME));
             application.setMeetupVenue(jsonObject.getString(CommonConstants.MEETUP_VENUE));
 
-            partner.setFirstName(jsonObject.getString(CommonConstants.FIRST_NAME));
-            partner.setLastName(jsonObject.getString(CommonConstants.LAST_NAME));
-            partner.setCompany(jsonObject.getString(CommonConstants.COMPANY));
-            partner.setProfilePicture(jsonObject.getString(CommonConstants.PROFILE_PICTURE));
-            partner.setLoanType(jsonObject.getString(CommonConstants.LOAN_TYPE));
-            partner.setPhoneNumber(jsonObject.getString(CommonConstants.PHONE));
+            customer.setFirstName(jsonObject.getString(CommonConstants.FIRST_NAME));
+            customer.setLastName(jsonObject.getString(CommonConstants.LAST_NAME));
+            customer.setCompanyName(jsonObject.getString(CommonConstants.COMPANY_NAME));
+            customer.setProfilePicture(jsonObject.getString(CommonConstants.PROFILE_PICTURE));
+            customer.setPhone(jsonObject.getString(CommonConstants.PHONE));
 
-            application.setPartner(partner);
+            application.setCustomer(customer);
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -7,12 +7,12 @@
 
 
     <LinearLayout
+        android:id="@+id/body_wrapper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:orientation="vertical"
-        >
+        android:layout_marginTop="100dp"
+        android:orientation="vertical">
 
         <ImageView
             android:layout_width="150dp"
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/please_wait_up_to_date"
+            android:text="@string/on"
             android:gravity="center"
             android:layout_marginTop="10dp"
             android:textSize="16sp"
@@ -47,13 +47,54 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/default_date"
             android:gravity="center"
             android:layout_marginTop="10dp"
             android:textStyle="bold"
             android:textSize="18sp"
             />
 
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/meetup_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/body_wrapper"
+        android:layout_marginRight="75dp"
+        android:background="@drawable/blue_rounded_corner_edittext"
+        android:layout_marginLeft="75dp"
+        android:text="Set A Meeting"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/meetup_btn"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <ImageView
+            android:id="@+id/cancel_app_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/nothing"
+            android:padding="10dp"
+            android:src="@drawable/reject" />
+
+        <ImageView
+            android:id="@+id/confirm_app_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/nothing"
+            android:padding="10dp"
+            android:src="@drawable/approve" />
 
     </LinearLayout>
 

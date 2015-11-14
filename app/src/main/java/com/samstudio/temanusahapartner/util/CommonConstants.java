@@ -26,7 +26,8 @@ public class CommonConstants {
     public static String SERVICE_PROFILE_PIC = BASE_URL + "images/profile_pictures/users/";
     public static String SERVICE_PROFILE_PIC_PARTNER = BASE_URL + "images/profile_pictures/partners/";
     public static String SERVICE_GET_PARTNER_LIST = BASE_URL + "loan/list_partners/";
-    public static String SERVICE_GET_APPLICANT_LIST = BASE_URL + "loan/list_users/";
+    public static String SERVICE_GET_APPLICANT_LIST = BASE_URL + "loan/list_applied_users/";
+    public static String SERVICE_GET_USERS_LIST = BASE_URL + "loan/list_users/";
     public static String SERVICE_SAVE_APPLICATION = BASE_URL + "loan/save_application";
     public static String SERVICE_PROCESS_APPLICATION = BASE_URL + "loan/process_application";
     public static String SERVICE_GET_CONNECTED_PARTNER = BASE_URL + "loan/list_connected_partners/";
@@ -109,4 +110,5 @@ public class CommonConstants {
     public static String PROCESS_DATETIME = "process_datetime";
     public static String MEETUP_DATETIME = "meetup_datetime";
     public static String MEETUP_VENUE = "meetup_venue";
+    public static String NOTES = "notes";
 }
