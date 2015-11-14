@@ -60,7 +60,7 @@ public class SignUpActivity extends Activity {
     }
 
     private void register() {
-        String url = CommonConstants.SERVICE_DO_REGISTER_USER;
+        String url = CommonConstants.SERVICE_DO_REGISTER_PARTNER;
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
         progressDialog.show();
@@ -73,12 +73,11 @@ public class SignUpActivity extends Activity {
                             JSONObject jsonObject = new JSONObject(response);
                             int status = jsonObject.getInt(CommonConstants.STATUS);
                             if (status == CommonConstants.STATUS_OK) {
-                                Toast.makeText(SignUpActivity.this, R.string.succeed, Toast.LENGTH_SHORT).show();
                                 saveDataInPreferences(jsonObject.getJSONObject(CommonConstants.RETURN_DATA));
                                 finish();
-                            } else {
-                                Toast.makeText(SignUpActivity.this, R.string.failed, Toast.LENGTH_SHORT).show();
                             }
+                            Toast.makeText(SignUpActivity.this, jsonObject.getString(CommonConstants.MESSAGE), Toast.LENGTH_SHORT).show();
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -109,7 +108,7 @@ public class SignUpActivity extends Activity {
     }
 
     private void saveDataInPreferences(JSONObject jsonObject) {
-        SharedPreferences.Editor editor= TemanUsahaApplication.getInstance().getSharedPreferences().edit();
+        SharedPreferences.Editor editor = TemanUsahaApplication.getInstance().getSharedPreferences().edit();
 
         try {
             editor.putInt(CommonConstants.ID, jsonObject.getInt(CommonConstants.ID));

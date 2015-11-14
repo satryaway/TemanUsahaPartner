@@ -11,18 +11,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.samstudio.temanusahapartner.util.APIAgent;
 import com.samstudio.temanusahapartner.util.CommonConstants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by satryaway on 9/10/2015.
@@ -82,62 +79,66 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void validateParameter() {
-        String url =CommonConstants.SERVICE_LOGIN_PARTNER;
+        String url = CommonConstants.SERVICE_LOGIN_PARTNER;
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
         progressDialog.show();
-        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            progressDialog.hide();
-                            JSONObject jsonObject = new JSONObject(response);
-                            int status = jsonObject.getInt(CommonConstants.STATUS);
-                            if (status == CommonConstants.STATUS_OK) {
-                                Toast.makeText(LoginActivity.this, R.string.login_succeed_text, Toast.LENGTH_SHORT).show();
-                                saveDataInPreferences(jsonObject.getJSONObject(CommonConstants.RETURN_DATA));
-                                JSONObject object = jsonObject.getJSONObject(CommonConstants.RETURN_DATA);
 
-                                if (object.getString(CommonConstants.IS_UPDATED).equals("0")) {
-                                    startActivity(new Intent(LoginActivity.this, PartnerProfileActivity.class));
-                                } else {
-                                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                }
+        RequestParams params = new RequestParams();
+        params.put(CommonConstants.EMAIL, email);
+        params.put(CommonConstants.PASSWORD, password);
+        params.put(CommonConstants.DEVICE_ID, token);
+        params.put(CommonConstants.LATITUDE, TemanUsahaApplication.getInstance().getSharedPreferences().getString(CommonConstants.LATITUDE, "0.0"));
+        params.put(CommonConstants.LONGITUDE, TemanUsahaApplication.getInstance().getSharedPreferences().getString(CommonConstants.LONGITUDE, "0.0"));
 
-                                finish();
-
-                            } else {
-                                Toast.makeText(LoginActivity.this, R.string.login_failed_text, Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                    }
-                }
-        ) {
+        APIAgent.post(url, params, new JsonHttpResponseHandler() {
             @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put(CommonConstants.EMAIL, email);
-                params.put(CommonConstants.PASSWORD, password);
-                params.put(CommonConstants.DEVICE_ID, token);
-                params.put(CommonConstants.LATITUDE, TemanUsahaApplication.getInstance().getSharedPreferences().getString(CommonConstants.LATITUDE, "0.0"));
-                params.put(CommonConstants.LONGITUDE, TemanUsahaApplication.getInstance().getSharedPreferences().getString(CommonConstants.LONGITUDE, "0.0"));
-                return params;
+            public void onStart() {
+                progressDialog.show();
             }
-        };
-        Volley.newRequestQueue(this).add(postRequest);
+
+            @Override
+            public void onFinish() {
+                progressDialog.hide();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject jsonObject) {
+                try {
+                    int status = jsonObject.getInt(CommonConstants.STATUS);
+                    if (status == CommonConstants.STATUS_OK) {
+                        Toast.makeText(LoginActivity.this, R.string.login_succeed_text, Toast.LENGTH_SHORT).show();
+                        saveDataInPreferences(jsonObject.getJSONObject(CommonConstants.RETURN_DATA));
+                        JSONObject object = jsonObject.getJSONObject(CommonConstants.RETURN_DATA);
+
+                        if (object.getString(CommonConstants.IS_UPDATED).equals("0")) {
+                            startActivity(new Intent(LoginActivity.this, PartnerProfileActivity.class));
+                        } else {
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        }
+                        finish();
+                    } else {
+                        Toast.makeText(LoginActivity.this, R.string.login_failed_text, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Toast.makeText(LoginActivity.this, R.string.RTO, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Toast.makeText(LoginActivity.this, R.string.SERVER_ERROR, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void saveDataInPreferences(JSONObject jsonObject) {
-        SharedPreferences.Editor editor= TemanUsahaApplication.getInstance().getSharedPreferences().edit();
+        SharedPreferences.Editor editor = TemanUsahaApplication.getInstance().getSharedPreferences().edit();
 
         try {
             editor.putInt(CommonConstants.ID, jsonObject.getInt(CommonConstants.ID));

@@ -342,7 +342,7 @@ public class PartnerProfileActivity extends AppCompatActivity {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getString(R.string.please_wait));
 
-        APIAgent.post(url, parameters, new JsonHttpResponseHandler(){
+        APIAgent.post(url, parameters, new JsonHttpResponseHandler() {
             @Override
             public void onStart() {
                 super.onStart();
@@ -401,7 +401,7 @@ public class PartnerProfileActivity extends AppCompatActivity {
             editor.putString(CommonConstants.DATE_OF_BIRTH, jsonObject.getString(CommonConstants.DATE_OF_BIRTH));
             editor.putString(CommonConstants.PLACE_OF_BIRTH, jsonObject.getString(CommonConstants.PLACE_OF_BIRTH));
             editor.putString(CommonConstants.PHONE, jsonObject.getString(CommonConstants.PHONE));
-            editor.putString(CommonConstants.COMPANY, jsonObject.getString(CommonConstants.COMPANY_NAME));
+            editor.putString(CommonConstants.COMPANY, jsonObject.getString(CommonConstants.COMPANY));
             editor.putString(CommonConstants.BRANCH, jsonObject.getString(CommonConstants.BRANCH));
             editor.putString(CommonConstants.DESCRIPTION, jsonObject.getString(CommonConstants.DESCRIPTION));
             editor.putString(CommonConstants.PROFILE_PICTURE, jsonObject.getString(CommonConstants.PROFILE_PICTURE));
