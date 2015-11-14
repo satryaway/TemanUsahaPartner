@@ -72,7 +72,7 @@ public class AppStatusListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        imageLoader.display(holder.partnerPicIV, CommonConstants.SERVICE_PROFILE_PIC_PARTNER + applicationList.get(position).getCustomer().getProfilePicture());
+        imageLoader.display(holder.partnerPicIV, CommonConstants.SERVICE_PROFILE_PIC + applicationList.get(position).getCustomer().getProfilePicture());
         holder.partnerNameTV.setText(applicationList.get(position).getCustomer().getFirstName() + " " + applicationList.get(position).getCustomer().getLastName());
         holder.ptNameTV.setText(applicationList.get(position).getCustomer().getCompanyName());
         holder.statusTV.setText(TextConverter.convertStatsCodeToString(applicationList.get(position).getStatus()));
