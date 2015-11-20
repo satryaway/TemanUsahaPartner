@@ -146,8 +146,8 @@ public class PartnerProfileActivity extends AppCompatActivity {
         kantorCabangET.setText(object.getString(CommonConstants.BRANCH));
         phoneNumberET.setText(object.getString(CommonConstants.PHONE));
         companyStrengthET.setText(object.getString(CommonConstants.DESCRIPTION));
-        creditPurposeSP.setSelection(Integer.valueOf(object.getString(CommonConstants.LOAN_TYPE))+1);
-        creditCeilingSP.setSelection(Integer.valueOf(object.getString(CommonConstants.LOAN_SEGMENT))+1);
+        creditPurposeSP.setSelection(Integer.valueOf(object.getString(CommonConstants.LOAN_TYPE))-1);
+        creditCeilingSP.setSelection(Integer.valueOf(object.getString(CommonConstants.LOAN_SEGMENT))-1);
 
         if (object.getString(CommonConstants.GENDER).equals(CommonConstants.MALE))
             maleRB.setChecked(true);

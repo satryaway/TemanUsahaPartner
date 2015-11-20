@@ -110,11 +110,12 @@ public class ShowMapActivity extends AppCompatActivity {
         double lng = Double.valueOf(TemanUsahaApplication.getInstance().getSharedPreferences().getString(CommonConstants.LONGITUDE, "0.0"));
         LatLng latLng = new LatLng(lat, lng);
         if (null != googleMap) {
-            googleMap.addMarker(new MarkerOptions()
+            Marker marker = googleMap.addMarker(new MarkerOptions()
                     .position(latLng)
                     .title(getString(R.string.your_location))
                     .draggable(false)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_white)));
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.tu_white)));
+            hashMap.put(marker, -1);
         }
     }
 
@@ -137,7 +138,8 @@ public class ShowMapActivity extends AppCompatActivity {
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                showCustomerInformation(markerMap.get(marker));
+                if (markerMap.get(marker) != -1)
+                    showCustomerInformation(markerMap.get(marker));
                 return false;
             }
         });

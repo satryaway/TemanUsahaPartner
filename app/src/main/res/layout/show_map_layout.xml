@@ -150,7 +150,7 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/grab"/>
+                android:src="@drawable/get_cust"/>
 
         </LinearLayout>
     </RelativeLayout>
