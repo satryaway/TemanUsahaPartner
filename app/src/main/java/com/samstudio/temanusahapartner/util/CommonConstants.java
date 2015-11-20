@@ -112,4 +112,5 @@ public class CommonConstants {
     public static String MEETUP_DATETIME = "meetup_datetime";
     public static String MEETUP_VENUE = "meetup_venue";
     public static String NOTES = "notes";
+    public static String DEFAULT_SERVER_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 }

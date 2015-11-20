@@ -17,6 +17,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.samstudio.temanusahapartner.util.APIAgent;
 import com.samstudio.temanusahapartner.util.CommonConstants;
+import com.samstudio.temanusahapartner.util.Utility;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -91,7 +92,7 @@ public class SetUpMeetingActivity extends AppCompatActivity {
                         timePicker.getCurrentMinute());
 
                 time = calendar.getTimeInMillis();
-                date.setText(String.valueOf(time));
+                date.setText(Utility.getRealDate(time));
                 alertDialog.dismiss();
             }});
 

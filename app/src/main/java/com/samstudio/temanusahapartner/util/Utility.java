@@ -8,7 +8,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -130,5 +132,12 @@ public class Utility {
             e.printStackTrace();
         }
         return application;
+    }
+
+    public static String getRealDate(long milliSeconds) {
+        SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DEFAULT_SERVER_DATE_FORMAT);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(milliSeconds);
+        return formatter.format(calendar.getTime());
     }
 }
