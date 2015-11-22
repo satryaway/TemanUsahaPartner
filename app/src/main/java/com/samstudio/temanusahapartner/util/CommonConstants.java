@@ -32,6 +32,7 @@ public class CommonConstants {
     public static String SERVICE_SAVE_APPLICATION = BASE_URL + "loan/save_application";
     public static String SERVICE_PROCESS_APPLICATION = BASE_URL + "loan/process_application";
     public static String SERVICE_GET_CONNECTED_PARTNER = BASE_URL + "loan/list_connected_partners/";
+    public static String SERVICE_DOWNLOAD_CIF = BASE_URL + "loan/export_application/";
     public static String PLACE_OF_BIRTH = "place_of_birth";
     public static String TYPE = "type";
     public static String RETURN_DATA = "return_data";

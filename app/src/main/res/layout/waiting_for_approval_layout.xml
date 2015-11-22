@@ -37,7 +37,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="@string/please_wait_up_to_date"
+            android:text="@string/start_from"
             android:textSize="16sp" />
 
         <TextView
@@ -51,36 +51,6 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/body_wrapper"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:weightSum="2">
-
-        <ImageView
-            android:id="@+id/cancel_app_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/nothing"
-            android:padding="10dp"
-            android:src="@drawable/reject" />
-
-        <ImageView
-            android:id="@+id/confirm_app_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/nothing"
-            android:padding="10dp"
-            android:src="@drawable/approve" />
 
     </LinearLayout>
 

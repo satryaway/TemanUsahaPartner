@@ -80,6 +80,14 @@ public class AppStatusFragment extends Fragment {
                         intent = new Intent(getActivity(), AdministrationProcessActivity.class);
                         intent.putExtra(CommonConstants.DATE, applicationList.get(position).getDatetime());
                         intent.putExtra(CommonConstants.APP_ID, applicationList.get(position).getId());
+                        intent.putExtra(CommonConstants.FIRST_NAME, applicationList.get(position).getCustomer().getFirstName() + "  " + applicationList.get(position).getCustomer().getLastName());
+                        intent.putExtra(CommonConstants.LOAN_TYPE, applicationList.get(position).getLoanType());
+                        intent.putExtra(CommonConstants.LOAN_SEGMENT, applicationList.get(position).getLoanSegment());
+                        intent.putExtra(CommonConstants.LOAN_PERIOD, applicationList.get(position).getTimeRange());
+                        intent.putExtra(CommonConstants.JOB, applicationList.get(position).getCustomer().getJob());
+                        intent.putExtra(CommonConstants.COMPANY_NAME, applicationList.get(position).getCustomer().getCompanyName());
+                        intent.putExtra(CommonConstants.DATE_OF_BIRTH, applicationList.get(position).getCustomer().getDateOfBirth());
+                        intent.putExtra(CommonConstants.MARITAL_STATUS, applicationList.get(position).getCustomer().getMaritalStatus());
                         break;
 
                     case "meet up":
@@ -121,8 +129,6 @@ public class AppStatusFragment extends Fragment {
     }
 
     private void getData() {
-        /*applicationList = position == 0 ? Seeder.getPartners() : Seeder.getPartnersWithResult();
-        listAdapter.update(applicationList);*/
         String url = CommonConstants.SERVICE_GET_USERS_LIST + TemanUsahaApplication.getInstance().getSharedPreferences().getInt(CommonConstants.ID, 1);
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage(getString(R.string.please_wait));

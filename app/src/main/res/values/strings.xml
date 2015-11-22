@@ -187,4 +187,7 @@
     <string name="please_provide_a_valid_venue">please_provide_a_valid_venue</string>
     <string name="notes">notes</string>
     <string name="succed_make_appointment">You have set up meeting appointment</string>
+    <string name="start_from">Start from</string>
+    <string name="usia">Usia</string>
+    <string name="cust_information_file">Customer Information File</string>
 </resources>

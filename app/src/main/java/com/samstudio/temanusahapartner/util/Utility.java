@@ -8,10 +8,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -88,12 +91,18 @@ public class Utility {
             application.setProcessDatetime(jsonObject.getString(CommonConstants.PROCESS_DATETIME));
             application.setMeetupDatetime(jsonObject.getString(CommonConstants.MEETUP_DATETIME));
             application.setMeetupVenue(jsonObject.getString(CommonConstants.MEETUP_VENUE));
+            application.setLoanType(jsonObject.getString(CommonConstants.LOAN_TYPE));
+            application.setLoanSegment(jsonObject.getString(CommonConstants.LOAN_SEGMENT));
+            application.setTimeRange(jsonObject.getString(CommonConstants.LOAN_PERIOD));
 
             customer.setFirstName(jsonObject.getString(CommonConstants.FIRST_NAME));
             customer.setLastName(jsonObject.getString(CommonConstants.LAST_NAME));
             customer.setCompanyName(jsonObject.getString(CommonConstants.COMPANY_NAME));
             customer.setProfilePicture(jsonObject.getString(CommonConstants.PROFILE_PICTURE));
             customer.setPhone(jsonObject.getString(CommonConstants.PHONE));
+            customer.setJob(jsonObject.getString(CommonConstants.JOB));
+            customer.setDateOfBirth(jsonObject.getString(CommonConstants.DATE_OF_BIRTH));
+            customer.setMaritalStatus(jsonObject.getString(CommonConstants.MARITAL_STATUS));
 
             application.setCustomer(customer);
         } catch (JSONException e) {
@@ -140,4 +149,30 @@ public class Utility {
         calendar.setTimeInMillis(milliSeconds);
         return formatter.format(calendar.getTime());
     }
+
+    public static int getAge(String dateOfBirth) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDate = new Date();
+        try {
+            convertedDate = dateFormat.parse(dateOfBirth);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        Calendar dob = Calendar.getInstance();
+        dob.setTime(convertedDate);
+        Calendar today = Calendar.getInstance();
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+        if (today.get(Calendar.MONTH) < dob.get(Calendar.MONTH)) {
+            age--;
+        } else if (today.get(Calendar.MONTH) == dob.get(Calendar.MONTH)
+                && today.get(Calendar.DAY_OF_MONTH) < dob.get(Calendar.DAY_OF_MONTH)) {
+            age--;
+        }
+
+        return age;
+    }
+
+
 }

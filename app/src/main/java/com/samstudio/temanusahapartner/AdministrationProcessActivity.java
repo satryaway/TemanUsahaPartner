@@ -2,6 +2,7 @@ package com.samstudio.temanusahapartner;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,11 +13,19 @@ import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.samstudio.temanusahapartner.entities.CreditCeiling;
+import com.samstudio.temanusahapartner.entities.CreditPurpose;
+import com.samstudio.temanusahapartner.entities.TimeRange;
 import com.samstudio.temanusahapartner.util.APIAgent;
 import com.samstudio.temanusahapartner.util.CommonConstants;
+import com.samstudio.temanusahapartner.util.Seeder;
+import com.samstudio.temanusahapartner.util.Utility;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -27,17 +36,21 @@ import cz.msebera.android.httpclient.Header;
  */
 public class AdministrationProcessActivity extends AppCompatActivity {
     private String date;
-    private TextView dateTV;
-    private ImageView confirmAppIV, cancelAppIV;
-    private String appID;
+    private TextView dateTV, customerNameTV, loanTypeTV, loanSegmentTV, loanPeriodTV, jobTV, ptNameTV;
+    private TextView ageTV, maritalStatusTV;
+    private ImageView confirmAppIV, cancelAppIV, getCIFIV;
+    private String appID, customerName, loanType, loanSegment, loanPeriod, job, ptName, age, maritalStatus;
     private Button setUpMeetingBtn;
-
+    private List<CreditPurpose> loanTypeList = new ArrayList<>();
+    private List<CreditCeiling> loanSegmentList = new ArrayList<>();
+    private List<TimeRange> loanPeriodList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         handleIntent();
+        collectData();
         initUI();
         setCallBack();
         setData();
@@ -47,6 +60,20 @@ public class AdministrationProcessActivity extends AppCompatActivity {
         Intent intent = getIntent();
         date = intent.getStringExtra(CommonConstants.DATE);
         appID = intent.getStringExtra(CommonConstants.APP_ID);
+        customerName = intent.getStringExtra(CommonConstants.FIRST_NAME);
+        loanType = intent.getStringExtra(CommonConstants.LOAN_TYPE);
+        loanSegment = intent.getStringExtra(CommonConstants.LOAN_SEGMENT);
+        loanPeriod = intent.getStringExtra(CommonConstants.LOAN_PERIOD);
+        job = intent.getStringExtra(CommonConstants.JOB);
+        ptName = intent.getStringExtra(CommonConstants.COMPANY_NAME);
+        age = intent.getStringExtra(CommonConstants.DATE_OF_BIRTH);
+        maritalStatus = intent.getStringExtra(CommonConstants.MARITAL_STATUS);
+    }
+
+    private void collectData() {
+        loanTypeList = Seeder.getCreditPurpose(this);
+        loanSegmentList = Seeder.getCreditCeiling(this);
+        loanPeriodList = Seeder.getTimeRange(this);
     }
 
     private void initUI() {
@@ -55,6 +82,15 @@ public class AdministrationProcessActivity extends AppCompatActivity {
         confirmAppIV = (ImageView) findViewById(R.id.confirm_app_iv);
         cancelAppIV = (ImageView) findViewById(R.id.cancel_app_iv);
         setUpMeetingBtn = (Button) findViewById(R.id.meetup_btn);
+        customerNameTV = (TextView) findViewById(R.id.customer_name_tv);
+        loanTypeTV = (TextView) findViewById(R.id.loan_type_tv);
+        loanSegmentTV = (TextView) findViewById(R.id.loan_segment_tv);
+        loanPeriodTV = (TextView) findViewById(R.id.time_range_tv);
+        jobTV = (TextView) findViewById(R.id.pekerjaan_tv);
+        ptNameTV = (TextView) findViewById(R.id.pt_name_tv);
+        ageTV = (TextView) findViewById(R.id.age_tv);
+        maritalStatusTV = (TextView) findViewById(R.id.status_tv);
+        getCIFIV = (ImageView) findViewById(R.id.get_cif_iv);
     }
 
     private void setCallBack() {
@@ -78,6 +114,15 @@ public class AdministrationProcessActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(AdministrationProcessActivity.this, SetUpMeetingActivity.class);
                 intent.putExtra(CommonConstants.APP_ID, appID);
+                startActivity(intent);
+            }
+        });
+
+        getCIFIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse(CommonConstants.SERVICE_DOWNLOAD_CIF + appID);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }
         });
@@ -131,6 +176,13 @@ public class AdministrationProcessActivity extends AppCompatActivity {
         });
     }
     private void setData() {
-        dateTV.setText(date);
+        customerNameTV.setText(customerName);
+        loanTypeTV.setText(loanTypeList.get(Integer.valueOf(loanType)).getName());
+        loanSegmentTV.setText(loanPeriodList.get(Integer.valueOf(loanSegment)-1).getName());
+        loanPeriodTV.setText(loanPeriodList.get(Integer.valueOf(loanType)-1).getName());
+        jobTV.setText(job);
+        ptNameTV.setText(ptName);
+        ageTV.setText(Utility.getAge(age) + " Tahun");
+        maritalStatusTV.setText(maritalStatus);
     }
 }
