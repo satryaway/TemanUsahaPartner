@@ -190,4 +190,5 @@
     <string name="start_from">Start from</string>
     <string name="usia">Usia</string>
     <string name="cust_information_file">Customer Information File</string>
+    <string name="waiting_for_process">Waiting for Process</string>
 </resources>

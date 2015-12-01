@@ -15,7 +15,7 @@ public class TextConverter {
         Context context = TemanUsahaApplication.getInstance();
         String convertedCode = "";
         switch (code) {
-            case "administration process" : convertedCode = context.getString(R.string.waiting_for_approval); break;
+            case "administration process" : convertedCode = context.getString(R.string.waiting_for_process); break;
             case "meet up" : convertedCode = context.getString(R.string.meet_up_process); break;
             case "approved" : convertedCode = context.getString(R.string.waiting_for_confirmation); break;
             case "confirmed" : convertedCode = context.getString(R.string.confirmed); break;

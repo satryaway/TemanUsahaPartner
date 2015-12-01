@@ -177,9 +177,9 @@ public class AdministrationProcessActivity extends AppCompatActivity {
     }
     private void setData() {
         customerNameTV.setText(customerName);
-        loanTypeTV.setText(loanTypeList.get(Integer.valueOf(loanType)).getName());
-        loanSegmentTV.setText(loanPeriodList.get(Integer.valueOf(loanSegment)-1).getName());
-        loanPeriodTV.setText(loanPeriodList.get(Integer.valueOf(loanType)-1).getName());
+        loanTypeTV.setText(loanTypeList.get(Integer.valueOf(loanType)-1).getName());
+        loanSegmentTV.setText(loanSegmentList.get(Integer.valueOf(loanSegment)-1).getName());
+        loanPeriodTV.setText(loanPeriodList.get(Integer.valueOf(loanPeriod)-1).getName());
         jobTV.setText(job);
         ptNameTV.setText(ptName);
         ageTV.setText(Utility.getAge(age) + " Tahun");

@@ -1,9 +1,11 @@
 package com.samstudio.temanusahapartner;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +44,7 @@ public class ShowMapActivity extends AppCompatActivity {
     private List<Application> applicationList = new ArrayList<>();
     private GoogleMap googleMap;
     private int chosenId = 1;
-    private ImageView nextIV;
+    private ImageView grabIV;
     private ImageView profilePictureIV;
     private TextView customerNameTV;
     private TextView loanTypeTV;
@@ -85,10 +87,28 @@ public class ShowMapActivity extends AppCompatActivity {
         loanTypeTV = (TextView) findViewById(R.id.loan_type_tv);
         loanSegmentTV = (TextView) findViewById(R.id.loan_segment_tv);
         timeRangeTV = (TextView) findViewById(R.id.time_range_tv);
+        grabIV = (ImageView) findViewById(R.id.grab_iv);
     }
 
     private void setCallBack() {
-
+        grabIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent;
+                intent = new Intent(ShowMapActivity.this, AdministrationProcessActivity.class);
+                intent.putExtra(CommonConstants.DATE, applicationList.get(position).getDatetime());
+                intent.putExtra(CommonConstants.APP_ID, applicationList.get(position).getId());
+                intent.putExtra(CommonConstants.FIRST_NAME, applicationList.get(position).getCustomer().getFirstName() + "  " + applicationList.get(position).getCustomer().getLastName());
+                intent.putExtra(CommonConstants.LOAN_TYPE, applicationList.get(position).getLoanType());
+                intent.putExtra(CommonConstants.LOAN_SEGMENT, applicationList.get(position).getLoanSegment());
+                intent.putExtra(CommonConstants.LOAN_PERIOD, applicationList.get(position).getTimeRange());
+                intent.putExtra(CommonConstants.JOB, applicationList.get(position).getCustomer().getJob());
+                intent.putExtra(CommonConstants.COMPANY_NAME, applicationList.get(position).getCustomer().getCompanyName());
+                intent.putExtra(CommonConstants.DATE_OF_BIRTH, applicationList.get(position).getCustomer().getDateOfBirth());
+                intent.putExtra(CommonConstants.MARITAL_STATUS, applicationList.get(position).getCustomer().getMaritalStatus());
+                startActivity(intent);
+            }
+        });
     }
 
     private void createMapView() {
@@ -215,9 +235,9 @@ public class ShowMapActivity extends AppCompatActivity {
         Application application = applicationList.get(position);
         imageLoader.display(profilePictureIV, CommonConstants.SERVICE_PROFILE_PIC + application.getCustomer().getProfilePicture());
         customerNameTV.setText(application.getCustomer().getFirstName() + " " + application.getCustomer().getLastName());
-        loanTypeTV.setText(creditPurposeList.get(Integer.valueOf(applicationList.get(position).getLoanType())));
-        loanSegmentTV.setText(creditCeilingList.get(Integer.valueOf(applicationList.get(position).getLoanSegment())));
-        timeRangeTV.setText(timeRangeList.get(Integer.valueOf(applicationList.get(position).getTimeRange())));
+        loanTypeTV.setText(creditPurposeList.get(Integer.valueOf(applicationList.get(position).getLoanType())-1));
+        loanSegmentTV.setText(creditCeilingList.get(Integer.valueOf(applicationList.get(position).getLoanSegment())-1));
+        timeRangeTV.setText(timeRangeList.get(Integer.valueOf(applicationList.get(position).getTimeRange())-1));
         this.position = position;
     }
 }
