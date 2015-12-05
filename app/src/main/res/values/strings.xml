@@ -191,4 +191,10 @@
     <string name="usia">Usia</string>
     <string name="cust_information_file">Customer Information File</string>
     <string name="waiting_for_process">Waiting for Process</string>
+    <string name="process">Process</string>
+    <string name="reject">Reject</string>
+    <string name="apply_date">Apply date :</string>
+    <string name="customer_has_cancelled_an_app">Customer has cancelled a loan application</string>
+    <string name="you_have_approved">You have approved \na loan application</string>
+    <string name="approve">Approve</string>
 </resources>

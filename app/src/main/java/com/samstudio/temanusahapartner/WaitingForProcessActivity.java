@@ -34,13 +34,14 @@ import cz.msebera.android.httpclient.Header;
  * Created by satryaway on 10/17/2015.
  * activity for administration process
  */
-public class AdministrationProcessActivity extends AppCompatActivity {
+public class WaitingForProcessActivity extends AppCompatActivity {
     private String date;
     private TextView dateTV, customerNameTV, loanTypeTV, loanSegmentTV, loanPeriodTV, jobTV, ptNameTV;
     private TextView ageTV, maritalStatusTV;
-    private ImageView confirmAppIV, cancelAppIV, getCIFIV;
+    private Button confirmAppIV;
+    private Button cancelAppIV;
+    private ImageView getCIFIV;
     private String appID, customerName, loanType, loanSegment, loanPeriod, job, ptName, age, maritalStatus;
-    private Button setUpMeetingBtn;
     private List<CreditPurpose> loanTypeList = new ArrayList<>();
     private List<CreditCeiling> loanSegmentList = new ArrayList<>();
     private List<TimeRange> loanPeriodList = new ArrayList<>();
@@ -79,9 +80,8 @@ public class AdministrationProcessActivity extends AppCompatActivity {
     private void initUI() {
         setContentView(R.layout.administration_process_layout);
         dateTV = (TextView) findViewById(R.id.date_tv);
-        confirmAppIV = (ImageView) findViewById(R.id.confirm_app_iv);
-        cancelAppIV = (ImageView) findViewById(R.id.cancel_app_iv);
-        setUpMeetingBtn = (Button) findViewById(R.id.meetup_btn);
+        confirmAppIV = (Button) findViewById(R.id.confirm_app_btn);
+        cancelAppIV = (Button) findViewById(R.id.cancel_app_btn);
         customerNameTV = (TextView) findViewById(R.id.customer_name_tv);
         loanTypeTV = (TextView) findViewById(R.id.loan_type_tv);
         loanSegmentTV = (TextView) findViewById(R.id.loan_segment_tv);
@@ -109,15 +109,6 @@ public class AdministrationProcessActivity extends AppCompatActivity {
             }
         });
 
-        setUpMeetingBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AdministrationProcessActivity.this, SetUpMeetingActivity.class);
-                intent.putExtra(CommonConstants.APP_ID, appID);
-                startActivity(intent);
-            }
-        });
-
         getCIFIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,7 +124,7 @@ public class AdministrationProcessActivity extends AppCompatActivity {
 
         RequestParams requestParams = new RequestParams();
         requestParams.put(CommonConstants.APPLICATION_ID, appID);
-        requestParams.put(CommonConstants.STATUS, b ? CommonConstants.APPROVED : CommonConstants.REJECTED);
+        requestParams.put(CommonConstants.STATUS, b ? CommonConstants.PROCESS : CommonConstants.REJECTED);
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getString(R.string.please_wait));
@@ -154,8 +145,8 @@ public class AdministrationProcessActivity extends AppCompatActivity {
                 try {
                     int status = response.getInt(CommonConstants.STATUS);
                     if (status == CommonConstants.STATUS_OK) {
-                        Toast.makeText(AdministrationProcessActivity.this, response.getString(CommonConstants.MESSAGE), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(AdministrationProcessActivity.this, AppStatusActivity.class);
+                        Toast.makeText(WaitingForProcessActivity.this, response.getString(CommonConstants.MESSAGE), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(WaitingForProcessActivity.this, AppStatusActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
@@ -166,20 +157,21 @@ public class AdministrationProcessActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Toast.makeText(AdministrationProcessActivity.this, R.string.RTO, Toast.LENGTH_SHORT).show();
+                Toast.makeText(WaitingForProcessActivity.this, R.string.RTO, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Toast.makeText(AdministrationProcessActivity.this, R.string.SERVER_ERROR, Toast.LENGTH_SHORT).show();
+                Toast.makeText(WaitingForProcessActivity.this, R.string.SERVER_ERROR, Toast.LENGTH_SHORT).show();
             }
         });
     }
+
     private void setData() {
         customerNameTV.setText(customerName);
-        loanTypeTV.setText(loanTypeList.get(Integer.valueOf(loanType)-1).getName());
-        loanSegmentTV.setText(loanSegmentList.get(Integer.valueOf(loanSegment)-1).getName());
-        loanPeriodTV.setText(loanPeriodList.get(Integer.valueOf(loanPeriod)-1).getName());
+        loanTypeTV.setText(loanTypeList.get(Integer.valueOf(loanType) - 1).getName());
+        loanSegmentTV.setText(loanSegmentList.get(Integer.valueOf(loanSegment) - 1).getName());
+        loanPeriodTV.setText(loanPeriodList.get(Integer.valueOf(loanPeriod) - 1).getName());
         jobTV.setText(job);
         ptNameTV.setText(ptName);
         ageTV.setText(Utility.getAge(age) + " Tahun");

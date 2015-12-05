@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/app_approved"
+            android:text="@string/you_have_approved"
             android:layout_marginTop="20dp"
             android:textSize="18sp"
             android:textStyle="bold"

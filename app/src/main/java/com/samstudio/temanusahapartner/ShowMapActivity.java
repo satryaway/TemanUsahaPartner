@@ -95,7 +95,7 @@ public class ShowMapActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent;
-                intent = new Intent(ShowMapActivity.this, AdministrationProcessActivity.class);
+                intent = new Intent(ShowMapActivity.this, WaitingForProcessActivity.class);
                 intent.putExtra(CommonConstants.DATE, applicationList.get(position).getDatetime());
                 intent.putExtra(CommonConstants.APP_ID, applicationList.get(position).getId());
                 intent.putExtra(CommonConstants.FIRST_NAME, applicationList.get(position).getCustomer().getFirstName() + "  " + applicationList.get(position).getCustomer().getLastName());

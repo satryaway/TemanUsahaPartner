@@ -114,4 +114,6 @@ public class CommonConstants {
     public static String MEETUP_VENUE = "meetup_venue";
     public static String NOTES = "notes";
     public static String DEFAULT_SERVER_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static String PROCESS = "process";
+    public static String IS_CANCELLED = "is_cancelled";
 }

@@ -12,13 +12,14 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.samstudio.temanusahapartner.AdministrationProcessActivity;
+import com.samstudio.temanusahapartner.SetUpMeetingActivity;
+import com.samstudio.temanusahapartner.WaitingForProcessActivity;
 import com.samstudio.temanusahapartner.AppConfirmedActivity;
 import com.samstudio.temanusahapartner.AppRejectedActivity;
 import com.samstudio.temanusahapartner.MeetUpProcessActivity;
 import com.samstudio.temanusahapartner.R;
 import com.samstudio.temanusahapartner.TemanUsahaApplication;
-import com.samstudio.temanusahapartner.WaitingForApprovalActivity;
+import com.samstudio.temanusahapartner.WaitingForConfirmationActivity;
 import com.samstudio.temanusahapartner.adapters.AppStatusListAdapter;
 import com.samstudio.temanusahapartner.entities.Application;
 import com.samstudio.temanusahapartner.util.APIAgent;
@@ -77,7 +78,7 @@ public class AppStatusFragment extends Fragment {
 
                 switch (applicationList.get(position).getStatus()) {
                     case "administration process":
-                        intent = new Intent(getActivity(), AdministrationProcessActivity.class);
+                        intent = new Intent(getActivity(), WaitingForProcessActivity.class);
                         intent.putExtra(CommonConstants.DATE, applicationList.get(position).getDatetime());
                         intent.putExtra(CommonConstants.APP_ID, applicationList.get(position).getId());
                         intent.putExtra(CommonConstants.FIRST_NAME, applicationList.get(position).getCustomer().getFirstName() + "  " + applicationList.get(position).getCustomer().getLastName());
@@ -93,14 +94,16 @@ public class AppStatusFragment extends Fragment {
                     case "meet up":
                         intent = new Intent(getActivity(), MeetUpProcessActivity.class);
                         intent.putExtra(CommonConstants.DATE, applicationList.get(position).getProcessDatetime());
-                        intent.putExtra(CommonConstants.PHONE_NUMBER, applicationList.get(position).getPartner().getPhoneNumber());
+                        intent.putExtra(CommonConstants.APP_ID, applicationList.get(position).getId());
+                        intent.putExtra(CommonConstants.PHONE_NUMBER, applicationList.get(position).getCustomer().getPhone());
                         intent.putExtra(CommonConstants.MEETUP_DATETIME, applicationList.get(position).getMeetupDatetime());
                         intent.putExtra(CommonConstants.MEETUP_VENUE, applicationList.get(position).getMeetupVenue());
+                        intent.putExtra(CommonConstants.NOTES, applicationList.get(position).getNotes());
                         break;
 
-                    case "approved":
-                        intent = new Intent(getActivity(), WaitingForApprovalActivity.class);
-                        intent.putExtra(CommonConstants.DATE, applicationList.get(position).getProcessDatetime());
+                    case "process":
+                        intent = new Intent(getActivity(), WaitingForConfirmationActivity.class);
+                        intent.putExtra(CommonConstants.DATE, applicationList.get(position).getDatetime());
                         intent.putExtra(CommonConstants.ID, applicationList.get(position).getId());
                         break;
 
@@ -108,14 +111,19 @@ public class AppStatusFragment extends Fragment {
                         intent = new Intent(getActivity(), AppRejectedActivity.class);
                         break;
 
+                    case "cancelled":
+                        intent = new Intent(getActivity(), AppRejectedActivity.class);
+                        intent.putExtra(CommonConstants.IS_CANCELLED, true);
+                        break;
+
                     case "confirmed":
-                        intent = new Intent(getActivity(), AppConfirmedActivity.class);
-                        intent.putExtra(CommonConstants.DATE, applicationList.get(position).getProcessDatetime());
+                        intent = new Intent(getActivity(), SetUpMeetingActivity.class);
+                        intent.putExtra(CommonConstants.APP_ID, applicationList.get(position).getId());
                         break;
 
                     default:
-                        intent = new Intent(getActivity(), AppRejectedActivity.class);
-                        intent.putExtra(CommonConstants.DATE, applicationList.get(position).getDatetime());
+                        intent = new Intent(getActivity(), AppConfirmedActivity.class);
+                        intent.putExtra(CommonConstants.DATE, applicationList.get(position).getProcessDatetime());
                         break;
                 }
 
@@ -153,11 +161,11 @@ public class AppStatusFragment extends Fragment {
                         JSONArray jsonArray = response.getJSONArray(CommonConstants.RETURN_DATA);
                         for (int i = 0; i < jsonArray.length(); i++) {
                             Application application = Utility.parseApplications(jsonArray.getJSONObject(i));
-                            if (position == 0 && (application.getStatus().equals(CommonConstants.ADMINISTRATION_PROCESS) || application.getStatus().equals(CommonConstants.MEET_UP) || application.getStatus().equals(CommonConstants.APPROVED))) {
+                            if (position == 0 && (application.getStatus().equals(CommonConstants.ADMINISTRATION_PROCESS) || application.getStatus().equals(CommonConstants.MEET_UP) || application.getStatus().equals(CommonConstants.PROCESS))) {
                                 applicationList.add(application);
                             }
 
-                            if (position == 1 && (application.getStatus().equals(CommonConstants.CONFIRMED) || application.getStatus().equals(CommonConstants.REJECTED) || application.getStatus().equals(CommonConstants.CANCELLED))) {
+                            if (position == 1 && (application.getStatus().equals(CommonConstants.CONFIRMED) || application.getStatus().equals(CommonConstants.REJECTED) || application.getStatus().equals(CommonConstants.CANCELLED) || application.getStatus().equals(CommonConstants.APPROVED) )) {
                                 applicationList.add(application);
                             }
                         }

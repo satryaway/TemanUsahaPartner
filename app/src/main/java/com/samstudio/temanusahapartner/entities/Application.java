@@ -5,7 +5,7 @@ package com.samstudio.temanusahapartner.entities;
  * Application model
  */
 public class Application {
-    private String id, datetime, status, processDatetime, meetupDatetime, meetupVenue, loanType, loanSegment, timeRange;
+    private String id, datetime, status, processDatetime, meetupDatetime, meetupVenue, loanType, loanSegment, timeRange, notes;
     private Partner partner = new Partner();
     private Customer customer = new Customer();
 
@@ -97,5 +97,13 @@ public class Application {
 
     public void setLoanType(String loanType) {
         this.loanType = loanType;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }

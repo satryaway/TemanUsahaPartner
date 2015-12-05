@@ -94,6 +94,7 @@ public class Utility {
             application.setLoanType(jsonObject.getString(CommonConstants.LOAN_TYPE));
             application.setLoanSegment(jsonObject.getString(CommonConstants.LOAN_SEGMENT));
             application.setTimeRange(jsonObject.getString(CommonConstants.LOAN_PERIOD));
+            application.setNotes(jsonObject.getString(CommonConstants.NOTES));
 
             customer.setFirstName(jsonObject.getString(CommonConstants.FIRST_NAME));
             customer.setLastName(jsonObject.getString(CommonConstants.LAST_NAME));

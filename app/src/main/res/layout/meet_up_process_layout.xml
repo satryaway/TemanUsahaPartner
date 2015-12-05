@@ -5,85 +5,142 @@
 
     <include layout="@layout/topbar_wrapper_for_app_status" />
 
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:orientation="vertical">
+        android:layout_below="@+id/top_bar_wrapper">
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center_horizontal"
-            android:contentDescription="@string/nothing"
-            android:src="@drawable/meetup" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:text="@string/meet_up_process"
-            android:textAllCaps="true"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@string/nothing"
+                android:src="@drawable/meetup" />
 
-        <TextView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="@string/meet_up_process"
+                android:textAllCaps="true"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/on"
-            android:textSize="16sp" />
+            <TextView
 
-        <TextView
-            android:id="@+id/date_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/default_date"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/on"
+                android:textSize="16sp" />
 
-        <TextView
+            <TextView
+                android:id="@+id/date_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/default_date"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/at"
-            android:textSize="16sp" />
+            <TextView
 
-        <TextView
-            android:id="@+id/venue_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:text="@string/default_venue"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/at"
+                android:textSize="16sp" />
 
-        <ImageView
-            android:id="@+id/call_partner_iv"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="15dp"
-            android:layout_gravity="center_horizontal"
-            android:contentDescription="@string/nothing"
-            android:src="@drawable/call" />
+            <TextView
+                android:id="@+id/venue_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/default_venue"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/notes_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_corner_edittext"
+                android:gravity="top|left"
+                android:hint="@string/notes"
+                android:inputType="textMultiLine"
+                android:lines="4"
+                android:minLines="4"
+                android:padding="10dp"
+                android:singleLine="false"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/call_partner_iv"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:contentDescription="@string/nothing"
+                android:src="@drawable/call" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cust_infomration_file_tv"
+                android:layout_marginBottom="70dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/confirm_app_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/blue_rounded_corner_edittext"
+                    android:text="@string/approve"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/cancel_app_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/red_rounded_corner_edittext"
+                    android:text="@string/reject"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <include layout="@layout/bottom_bar_wrapper" />
 

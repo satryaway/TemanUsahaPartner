@@ -63,11 +63,11 @@
         <activity android:name=".PartnerConfirmationActivity" />
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
         <activity android:name=".DeliveryDataConfirmationActivity" />
-        <activity android:name=".AdministrationProcessActivity" />
+        <activity android:name=".WaitingForProcessActivity" />
         <activity android:name=".MeetUpProcessActivity" />
         <activity android:name=".Main" />
         <activity android:name=".GetIntent" />
-        <activity android:name=".WaitingForApprovalActivity" />
+        <activity android:name=".WaitingForConfirmationActivity" />
         <activity android:name=".AppConfirmedActivity" />
         <activity android:name=".AppRejectedActivity" />
         <activity android:name=".AppStatusActivity" />
