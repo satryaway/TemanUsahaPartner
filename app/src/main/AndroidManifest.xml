@@ -1,12 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.samstudio.temanusahapartner">
+    package="com.jixstreet.temanusahapartner">
 
     <permission
-        android:name="com.samstudio.temanusahapartner.permission.MAPS_RECEIVE"
+        android:name="com.jixstreet.temanusahapartner.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="com.samstudio.temanusahapartner.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="com.jixstreet.temanusahapartner.permission.MAPS_RECEIVE" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -21,13 +21,13 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="com.google.android.c2dm.permission.SEND" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="com.samstudio.temanusahapartner.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.jixstreet.temanusahapartner.permission.C2D_MESSAGE" />
     <!-- [END gcm_permission] -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <permission android:name="com.samstudio.temanusahapartner.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <permission android:name="com.jixstreet.temanusahapartner.permission.C2D_MESSAGE" android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.samstudio.temanusahapartner.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.jixstreet.temanusahapartner.permission.C2D_MESSAGE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -41,40 +41,40 @@
         android:required="true" />
 
     <application
-        android:name="com.samstudio.temanusahapartner.TemanUsahaApplication"
+        android:name="com.jixstreet.temanusahapartner.TemanUsahaApplication"
         android:icon="@drawable/ic_white"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreen">
+        <activity android:name="com.jixstreet.temanusahapartner.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".TermsActivity" />
-        <activity android:name=".ChangePasswordActivity" />
-        <activity android:name=".CustomerProfileActivity" />
-        <activity android:name=".PickShapeActivity" />
-        <activity android:name=".RegisterProfileActivity" />
-        <activity android:name=".ShowMapActivity" />
-        <activity android:name=".CountDownActivity" />
-        <activity android:name=".PartnerConfirmationActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.LoginActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.MainActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.TermsActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.ChangePasswordActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.CustomerProfileActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.PickShapeActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.RegisterProfileActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.ShowMapActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.CountDownActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.PartnerConfirmationActivity" />
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
-        <activity android:name=".DeliveryDataConfirmationActivity" />
-        <activity android:name=".WaitingForProcessActivity" />
-        <activity android:name=".MeetUpProcessActivity" />
-        <activity android:name=".Main" />
-        <activity android:name=".GetIntent" />
-        <activity android:name=".WaitingForConfirmationActivity" />
-        <activity android:name=".AppConfirmedActivity" />
-        <activity android:name=".AppRejectedActivity" />
-        <activity android:name=".AppStatusActivity" />
-        <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".PartnerProfileActivity" />
-        <activity android:name=".SetUpMeetingActivity" />
-        <activity android:name=".SignUpActivity" android:windowSoftInputMode="adjustPan" />
+        <activity android:name="com.jixstreet.temanusahapartner.DeliveryDataConfirmationActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.WaitingForProcessActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.MeetUpProcessActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.Main" />
+        <activity android:name="com.jixstreet.temanusahapartner.GetIntent" />
+        <activity android:name="com.jixstreet.temanusahapartner.WaitingForConfirmationActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.AppConfirmedActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.AppRejectedActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.AppStatusActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.ForgotPasswordActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.PartnerProfileActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.SetUpMeetingActivity" />
+        <activity android:name="com.jixstreet.temanusahapartner.SignUpActivity" android:windowSoftInputMode="adjustPan" />
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
@@ -82,13 +82,13 @@
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <category android:name="com.samstudio.temanusahapartner" />
+                <category android:name="com.jixstreet.temanusahapartner" />
             </intent-filter>
         </receiver>
 
         <!-- [START gcm_listener] -->
         <service
-            android:name=".gcm.MyGcmListenerService"
+            android:name="com.jixstreet.temanusahapartner.gcm.MyGcmListenerService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -97,7 +97,7 @@
         <!-- [END gcm_listener] -->
         <!-- [START instanceId_listener] -->
         <service
-            android:name=".gcm.MyInstanceIDListenerService"
+            android:name="com.jixstreet.temanusahapartner.gcm.MyInstanceIDListenerService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID"/>
@@ -105,7 +105,7 @@
         </service>
         <!-- [END instanceId_listener] -->
         <service
-            android:name=".gcm.RegistrationIntentService"
+            android:name="com.jixstreet.temanusahapartner.gcm.RegistrationIntentService"
             android:exported="false">
         </service>
 
