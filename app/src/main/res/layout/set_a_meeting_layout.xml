@@ -118,6 +118,7 @@
                 android:lines="4"
                 android:minLines="4"
                 android:padding="10dp"
+                android:scrollbars="vertical"
                 android:singleLine="false" />
 
 

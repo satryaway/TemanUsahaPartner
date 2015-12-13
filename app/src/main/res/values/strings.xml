@@ -58,7 +58,7 @@
     <string name="total_barang_berharga_lainnya">Total (Rp) Barang Berharga Lainnya</string>
     <string name="total_piutang">Total (Rp) Piutang</string>
     <string name="total_hutang_bank_dagang">Total (Rp) Hutang Bank/Dagang</string>
-    <string name="tujuan_kredit">Tujuan Kredit</string>
+    <string name="segmentasi_kredit">Segmentasi Kredit</string>
     <string name="plafon_kredit">Plafon Kredit</string>
     <string name="jangka_waktu">Jangka Waktu</string>
     <string name="kredit_modal_usaha">Kredit Modal Usaha</string>
@@ -197,4 +197,6 @@
     <string name="customer_has_cancelled_an_app">Customer has cancelled a loan application</string>
     <string name="you_have_approved">You have approved \na loan application</string>
     <string name="approve">Approve</string>
+    <string name="symbol_not_allowed">Symbol not allowed</string>
+    <string name="get_customer">Get Customer</string>
 </resources>

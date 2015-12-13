@@ -35,6 +35,10 @@ public class Utility {
         return isValid;
     }
 
+    public static boolean isValidWord(String w) {
+        return w.matches("[a-zA-Z.?, ]*");
+    }
+
     public static List<Partner> parsePartners(JSONObject response) {
         List<Partner> partnerList = new ArrayList<>();
         try {

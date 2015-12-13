@@ -57,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="@string/tujuan_kredit"
+                    android:text="@string/segmentasi_kredit"
                     android:textStyle="bold" />
 
                 <Spinner
@@ -65,7 +65,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:prompt="@string/tujuan_kredit" />
+                    android:prompt="@string/segmentasi_kredit" />
 
             </LinearLayout>
 

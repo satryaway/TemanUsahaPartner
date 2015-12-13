@@ -29,7 +29,7 @@
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/imageView"
             android:layout_toStartOf="@+id/imageView"
-            android:text="@string/get_loan"
+            android:text="@string/get_customer"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="20sp"

@@ -48,7 +48,7 @@
             <EditText
                 android:id="@+id/email_et"
                 style="@style/default_edit_text_format"
-                android:hint="@string/username_or_email"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress" />
 
 

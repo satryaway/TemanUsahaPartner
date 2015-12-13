@@ -74,6 +74,7 @@ public class PartnerProfileActivity extends AppCompatActivity {
     private int creditPurpose = 1, creditCeiling = 1;
     private SharedPreferences sharedPreferences;
     private UniversalImageLoader imageLoader;
+    private ImageView closeActivityIV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,6 +175,8 @@ public class PartnerProfileActivity extends AppCompatActivity {
         saveBtn = (Button) findViewById(R.id.save_btn);
         maleRB.setChecked(true);
 
+        closeActivityIV = (ImageView) findViewById(R.id.close_activity_iv);
+
         creditPurposeSP = (Spinner) findViewById(R.id.tujuan_kredit_sp);
         creditCeilingSP = (Spinner) findViewById(R.id.plafon_kredit_sp);
 
@@ -242,6 +245,13 @@ public class PartnerProfileActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+
+        closeActivityIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     private DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
@@ -252,6 +262,7 @@ public class PartnerProfileActivity extends AppCompatActivity {
     };
 
     private void showDate(int year, int month, int day) {
+        month = month + 1;
         String fixedMonth = month < 10 ? "0" + month : "" + month;
         String fixedDay = day < 10 ? "0" + day : "" + day;
         dateOfBirthET.setText(new StringBuilder().append(year).append("-").append(fixedMonth).append("-").append(fixedDay));
@@ -298,6 +309,8 @@ public class PartnerProfileActivity extends AppCompatActivity {
 
         if (companyStrengthET.getText().length() == 0)
             companyStrengthET.setError(getString(R.string.should_not_be_empty_error));
+        else if (!Utility.isValidWord(companyStrengthET.getText().toString()))
+            companyStrengthET.setError(getString(R.string.symbol_not_allowed));
         else
             filledFormTotal++;
 

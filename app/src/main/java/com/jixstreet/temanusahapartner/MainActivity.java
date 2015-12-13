@@ -5,12 +5,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.jixstreet.temanusahapartner.util.CommonConstants;
 
@@ -66,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
                                 doLogOut();
                                 break;
 
+                            case R.id.contact_us:
+                                sendEmail();
+                                break;
+
                             default:
                                 break;
                         }
@@ -97,6 +103,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, AppStatusActivity.class));
             }
         });
+    }
+
+    private void sendEmail() {
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                "mailto",CommonConstants.SUPPORT_EMAIL, null));
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "");
+        startActivity(Intent.createChooser(emailIntent, "Send email..."));
     }
 
     private void doLogOut() {
